@@ -1,0 +1,51 @@
+.crud-container {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.form-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-section input {
+  padding: 8px;
+}
+
+.form-section button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+.edit-btn {
+  background: orange;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
