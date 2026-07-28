@@ -1,0 +1,322 @@
+
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8082:8082"
+#     environment:
+#       - DB_HOST=db
+#       - DB_USER=root
+#       - DB_PASSWORD=root123
+#       - DB_DATABASE=TEST_DB
+#       - DB_PORT=3306
+#       - PORT=8082
+#     depends_on:
+#       - db
+
+#   frontend:
+#     build: ./deployapp
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - backend
+
+#   db:
+#     image: mysql:8
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=root123
+#       - MYSQL_DATABASE=TEST_DB
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+      
+
+# volumes:
+#   mysql_data:
+
+
+
+
+
+# without  env fileown databse
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8082:8082"
+#     environment:
+#       - DB_HOST=db
+#       - DB_USER=root
+#       - DB_PASSWORD=root123
+#       - DB_DATABASE=TEST_DB
+#       - DB_PORT=3306
+#       - PORT=8082
+#     depends_on:
+#       db:
+#         condition: service_healthy
+
+#   frontend:
+#     build: ./deployapp
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - backend
+
+#   db:
+#     image: mysql:8
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=root123
+#       - MYSQL_DATABASE=TEST_DB
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+
+# volumes:
+#   mysql_data:
+
+
+# with env file and docker mysql db 
+
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8082:8082"
+#     # env_file:
+#     #  - ./backend/.env
+#     depends_on:
+#       db:
+#         condition: service_healthy
+
+#   frontend:
+#     build: ./deployapp
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - backend
+
+#   db:
+#     image: mysql:8
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=root123
+#       - MYSQL_DATABASE=TEST_DB
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+
+# volumes:
+#   mysql_data:
+
+
+# no enev file ,
+#  phpadmin db
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8082:8082"
+#     # env_file:
+#     #  - ./backend/.env
+#     depends_on:
+#       db:
+#         condition: service_healthy
+
+#   frontend:
+#     build: ./deployapp
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - backend
+
+#   db:
+#     image: mysql:8
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=root123
+#       - MYSQL_DATABASE=TEST_DB
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+
+#   phpmyadmin:
+#     image: phpmyadmin
+#     ports:
+#       - "8081:80"
+#     environment:
+#       - PMA_HOST=db
+#       - PMA_USER=root
+#       - PMA_PASSWORD=root123
+#     depends_on:
+#       - db    
+
+# volumes:
+#   mysql_data: 
+
+
+
+# this for once build,i cnat rebuil again if any chnage made in frontedn and backend it reflect to live  below code thtbi s
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8082:8082"
+#     env_file:
+#       - ./backend/.env
+#     volumes:
+#       - ./backend:/app
+#       - /app/node_modules
+#     depends_on:
+#       db:
+#         condition: service_healthy
+
+#   frontend:
+#     build: ./deployapp
+#     ports:
+#       - "3000:3000"
+
+#     volumes:
+#       - ./deployapp:/app
+#       - /app/node_modules
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true
+#       - WATCHPACK_POLLING=true
+#     depends_on:
+#       - backend
+
+#   db:
+#     image: mysql:8
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=root123
+#       - MYSQL_DATABASE=TEST_DB
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+
+#   phpmyadmin:
+#     image: phpmyadmin
+#     ports:
+#       - "8081:80"
+#     environment:
+#       - PMA_HOST=db
+#       - PMA_USER=root
+#       - PMA_PASSWORD=root123
+#     depends_on:
+#       - db    
+
+# volumes:
+#   mysql_data: 
+
+
+# # live reflect chnages i can remove db servcies
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8082:8082"
+#     env_file:
+#       - ./backend/.env
+#     volumes:
+#       - ./backend:/app
+#       - /app/node_modules
+#     depends_on:
+#       db:
+#         condition: service_healthy
+
+#   frontend:
+#     build: ./deployapp
+#     ports:
+#       - "3000:3000"
+
+#     volumes:
+#       - ./deployapp:/app
+#       - /app/node_modules
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true
+#       - WATCHPACK_POLLING=true
+#     depends_on:
+#       - backend
+
+
+
+# this code i use dockerignore no chnage like this
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8082:8082"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./deployapp
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./deployapp:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATABASE=TEST_DB
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=root123
+    depends_on:
+      - db    
+
+volumes:
+  mysql_data:

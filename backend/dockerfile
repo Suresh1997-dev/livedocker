@@ -1,0 +1,19 @@
+# backend/Dockerfile
+# without nodemon
+# FROM node:18
+# WORKDIR /app
+# COPY package*.json ./
+# RUN npm install
+# COPY . .
+# EXPOSE 8082
+# CMD ["node", "server.js"]
+
+
+# with nodemon
+FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 8082
+CMD ["npx", "nodemon","-L","server.js"]
