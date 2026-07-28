@@ -101,7 +101,7 @@ function CrudData() {
             <th>Emailid</th>
             <th>Created-Time</th>
             <th>Edit</th>
-            <th>Delete</th>
+            <th>Deletee</th>
           </tr>
         </thead>
 
